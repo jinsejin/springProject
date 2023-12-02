@@ -46,7 +46,7 @@ public class BoardController {
         return "editform";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/editok", method = RequestMethod.POST)
     public String editPostOk(BoardVO vo) {
         if (boardService.updateBoard(vo) == 0) {
             System.out.println("데이터 수정 실패");
