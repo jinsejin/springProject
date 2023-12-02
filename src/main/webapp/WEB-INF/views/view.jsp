@@ -13,5 +13,9 @@
 <p>Writer: ${list.writer}</p>
 <p>Content: ${list.content}</p>
 <p>Regdate: ${list.regdate}</p>
+<p>Gender: ${list.gender}</p>
+<p>Age: ${list.age}</p>
+<p>Id: ${list.id}</p>
+<p>Password: ${list.password}</p>
 <button type="button" onclick="location.href='../list'">목록으로</button>
 </body>
