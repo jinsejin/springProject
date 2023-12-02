@@ -13,8 +13,8 @@ public class BoardDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
-    private static final String BOARDSpring_INSERT = "insert into BOARDSpring (title, writer, content, gender ,age , id, password ) values (?, ?, ?, ?)";
+
+    private static final String BOARDSpring_INSERT = "insert into BOARDSpring (title, writer, content, gender ,age , id, password ) values (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String BOARDSpring_UPDATE = "update BOARDSpring set title=?, writer=?, content=? where seq=?";
     private static final String BOARDSpring_DELETE = "delete from BOARDSpring where seq=?";
     private static final String BOARDSpring_GET = "select * from BOARDSpring where seq=?";
@@ -22,14 +22,17 @@ public class BoardDAO {
 
 
     public int insertBoard(BoardVO vo) {
-        String sql = "insert into BOARDSpring (title, writer, content, category) values ("
+        String sql = "insert into BOARDSpring (title, writer, content, category, gender, age, id, password) values ("
                 + "'" + vo.getTitle() + "',"
                 + "'" + vo.getWriter() + "',"
                 + "'" + vo.getContent() + "',"
-                + "'" + vo.getCategory() + "')";
+                + "'" + vo.getCategory() + "',"
+                + "'" + vo.getGender() + "',"
+                + "'" + vo.getAge() + "',"
+                + "'" + vo.getId() +  "',"
+                + "'" + vo.getPassword() + "')";
         return jdbcTemplate.update(sql);
     }
-    // 글 삭제
     public int deleteBoard(int seq) {
         String sql = "delete from BOARDSpring where seq = " + seq;
         return jdbcTemplate.update(sql);
@@ -57,6 +60,10 @@ public class BoardDAO {
             vo.setContent(rs.getString("content"));
             vo.setCategory(rs.getString("category"));
             vo.setRegdate(rs.getTimestamp("regdate"));
+            vo.setGender(rs.getString("gender"));
+            vo.setAge(rs.getString("age"));
+            vo.setId(rs.getString("id"));
+            vo.setPassword(rs.getString("password"));
             return vo;
         }
     }
