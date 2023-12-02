@@ -75,7 +75,7 @@
     <tr><td>Writer:</td><td><form:input path="writer"/></td></tr>
     <tr><td>Content:</td><td><form:textarea cols="50" rows="5" path="content"/></td></tr>
   </table>
-  <button type="button" onclick="location.href = 'list'">취소하기</button>
+  <button type="button" onclick="location.href = '../list' ">취소하기</button>
   <button type="submit">수정하기</button>
 </form:form>
 </body>

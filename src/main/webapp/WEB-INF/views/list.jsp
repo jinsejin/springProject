@@ -13,7 +13,7 @@
         #list td, #list th {
             border: 1px solid #ddd;
             padding: 8px;
-            text-align:center;
+            text-align: center;
         }
         #list tr:nth-child(even){background-color: #f2f2f2;}
         #list tr:hover {background-color: #ddd;}
