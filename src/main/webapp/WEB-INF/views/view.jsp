@@ -13,5 +13,5 @@
 <p>Writer: ${list.writer}</p>
 <p>Content: ${list.content}</p>
 <p>Regdate: ${list.regdate}</p>
-<button type="button" onclick="location.href='../posts'">목록으로</button>
+<button type="button" onclick="location.href='../list'">목록으로</button>
 </body>

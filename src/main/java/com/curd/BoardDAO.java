@@ -13,9 +13,8 @@ public class BoardDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    // SQL 쿼리는 실제 테이블과 컬럼명에 맞게 수정해야 할 수 있다.
-    private static final String BOARDSpring_INSERT = "insert into BOARDSpring (title, writer, content) values (?, ?, ?, ?)";
+    
+    private static final String BOARDSpring_INSERT = "insert into BOARDSpring (title, writer, content, gender ,age , id, password ) values (?, ?, ?, ?)";
     private static final String BOARDSpring_UPDATE = "update BOARDSpring set title=?, writer=?, content=? where seq=?";
     private static final String BOARDSpring_DELETE = "delete from BOARDSpring where seq=?";
     private static final String BOARDSpring_GET = "select * from BOARDSpring where seq=?";
@@ -30,7 +29,6 @@ public class BoardDAO {
                 + "'" + vo.getCategory() + "')";
         return jdbcTemplate.update(sql);
     }
-
     // 글 삭제
     public int deleteBoard(int seq) {
         String sql = "delete from BOARDSpring where seq = " + seq;
@@ -44,6 +42,7 @@ public class BoardDAO {
                 + "category='" + vo.getCategory() + "' where seq=" + vo.getSeq();
         return jdbcTemplate.update(sql);
     }
+
     class BoardRowMapper implements RowMapper<BoardVO> {
         @Override
         public BoardVO mapRow(ResultSet rs, int rowNum) throws SQLException {

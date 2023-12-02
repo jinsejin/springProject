@@ -2,45 +2,27 @@
 <%@ page import="com.curd.BoardDAO, com.curd.BoardVO,java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-
 <head>
-    <title>게시판</title>
+    <title>자유 게시판</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            text-align: center;
-        }
-        table {
-            width: 90%;
+        #list {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+        #list td, #list th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align:center;
+        }
+        #list tr:nth-child(even){background-color: #f2f2f2;}
+        #list tr:hover {background-color: #ddd;}
+        #list th {
+            padding-top: 12px;
+            padding-bottom: 12px;
             text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-        a {
-            text-decoration: none;
-            color: #333;
-        }
-        .add-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
+            background-color: #006bb3;
+            color: white;
         }
     </style>
 </head>
@@ -54,9 +36,11 @@
         <th>Writer</th>
         <th>Content</th>
         <th>Regdate</th>
+        <th>Detail</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
+
     <c:forEach items="${list}" var="u">
         <tr>
             <td>${u.seq}</td>
@@ -65,18 +49,17 @@
             <td>${u.writer}</td>
             <td>${u.content}</td>
             <td>${u.regdate}</td>
-            <td><a href="editform/${u.seq}">EDIT</a></td>
-            <td><a href="javascript:delete_ok('${u.seq}')">DLETE</a></td>
+            <td><a href="view/${u.seq}">Detail</a></td>
+            <td><a href="editform/${u.seq}">Edit</a></td>
+            <td><a href="javascript:delete_ok('${u.seq}')">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
 <br/><button type="button" onclick="location.href='add'">새글쓰기</button>
 <script>
-    function delete_ok(id) {
-        var confirmCheck = confirm("정말로 삭제하시겠습니까?");
-        if(confirmCheck) {
-            location.href='/deleteOk' + id;
-        }
+    function delete_ok(id){
+        let a = confirm("정말로 삭제하겠습니까?");
+        if(a) location.href='deleteOk/' + id;
     }
 </script>
 </body>

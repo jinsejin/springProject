@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.DateFormat;
+import java.util.Locale;
 
 @Controller
 @RequestMapping(value="/board")
@@ -17,16 +18,10 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    @RequestMapping(value = "/")
-    public String home(Model model) {
-        String serverTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        model.addAttribute("serverTime", serverTime);
-        return "home";
-    }
-
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String boardList(Model model){
         model.addAttribute("list", boardService.getBoardList());
+        System.out.println(boardService.getBoardList().toString());
         return "list";
     }
 
@@ -51,7 +46,7 @@ public class BoardController {
         return "editform";
     }
 
-    @RequestMapping(value = "editOk", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public String editPostOk(BoardVO vo) {
         if (boardService.updateBoard(vo) == 0) {
             System.out.println("데이터 수정 실패");
@@ -61,12 +56,14 @@ public class BoardController {
         return "redirect:list";
     }
 
-    @RequestMapping(value = "deleteOk/{id}", method = RequestMethod.GET)
-    public String deletePostOk(@PathVariable("id") int id) {
-        if (boardService.deleteBoard(id) == 0) {
-            System.out.println("데이터 삭제 실패 ");
-        } else {
-            System.out.println("데이터 삭제 성공!!");
+    @RequestMapping(value = "/deleteOk/{id}", method = RequestMethod.GET)
+    public String deletePost(@PathVariable("id") int id) {
+        int i = boardService.deleteBoard(id);
+        if (i==0) {
+            System.out.println("데이터 삭제 실패");
+        }
+        else {
+            System.out.println("데이터 삭제 성공!!!");
         }
         return "redirect:../list";
     }
